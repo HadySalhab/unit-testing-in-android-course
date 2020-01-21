@@ -46,10 +46,7 @@ public class FetchUserUseCaseSyncTestRef {
     @Before
     public void setup() throws Exception {
         mFetchUserHttpEndpointSyncTestDouble = new FetchUserHttpEndpointSyncTestDouble();
-
-        // TODO: assign your implementation of FetchUserUseCaseSync to SUT
-        // SUT = new FetchUserUseCaseSyncImpl(mFetchUserHttpEndpointSyncTestDouble, mUsersCacheMock);
-
+        SUT = new FetchUserUseCaseSyncImpl(mFetchUserHttpEndpointSyncTestDouble, mUsersCacheMock);
         userNotInCache();
         endpointSuccess();
     }
@@ -91,6 +88,7 @@ public class FetchUserUseCaseSyncTestRef {
         verify(mUsersCacheMock).cacheUser(ac.capture());
         assertThat(ac.getValue(), is(USER));
     }
+
 
     @Test
     public void fetchUserSync_notInCacheEndpointAuthError_failureStatus() throws Exception {
