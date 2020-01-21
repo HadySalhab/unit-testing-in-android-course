@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -54,10 +55,10 @@ public class FetchUserUseCaseSyncImplTest {
 
     @Test
     public void fetchUserSync_notInCache_correctUserPassedToEndPoint() throws NetworkErrorException {
-        ArgumentCaptor<String> ac = ArgumentCaptor.forClass(String.class);
+       // ArgumentCaptor<String> ac = ArgumentCaptor.forClass(String.class);
         SUT.fetchUserSync(USER_ID);
-        verify(mFetchUserHttpEndpointSyncMock).fetchUserSync(ac.capture());
-        Assert.assertThat(ac.getValue(), is(USER_ID));
+        verify(mFetchUserHttpEndpointSyncMock).fetchUserSync(eq(USER_ID));
+       // Assert.assertThat(ac.getValue(), is(USER_ID));
     }
 
     @Test
@@ -75,10 +76,10 @@ public class FetchUserUseCaseSyncImplTest {
 
     @Test
     public void fetchUserSync_notInCacheEndpointSuccess_userCached() throws Exception {
-        ArgumentCaptor<User> ac = ArgumentCaptor.forClass(User.class);
+       // ArgumentCaptor<User> ac = ArgumentCaptor.forClass(User.class);
         SUT.fetchUserSync(USER_ID);
-        verify(mUsersCacheMock).cacheUser(ac.capture());
-        Assert.assertEquals(USER, ac.getValue());
+        verify(mUsersCacheMock).cacheUser(eq(USER));
+       // Assert.assertEquals(USER, ac.getValue());
     }
 
     @Test
@@ -167,10 +168,10 @@ public class FetchUserUseCaseSyncImplTest {
 
     @Test
     public void fetchUserSync_correctUserIdPassedToCache() throws Exception {
-        ArgumentCaptor<String> ac = ArgumentCaptor.forClass(String.class);
+      //  ArgumentCaptor<String> ac = ArgumentCaptor.forClass(String.class);
         SUT.fetchUserSync(USER_ID);
-        verify(mUsersCacheMock).getUser(ac.capture());
-        Assert.assertEquals(USER_ID, ac.getValue());
+        verify(mUsersCacheMock).getUser(eq(USER_ID));
+       // Assert.assertEquals(USER_ID, ac.getValue());
     }
 
     @Test
