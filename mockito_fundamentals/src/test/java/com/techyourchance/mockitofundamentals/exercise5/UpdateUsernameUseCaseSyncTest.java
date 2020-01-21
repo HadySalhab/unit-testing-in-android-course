@@ -11,8 +11,11 @@ import com.techyourchance.mockitofundamentals.exercise5.users.UsersCache;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.omg.CORBA.Any;
 
 import java.util.concurrent.ExecutionException;
@@ -28,19 +31,19 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UpdateUsernameUseCaseSyncTest {
     public static final String USERNAME = "username";
     public static final String USERID = "userId";
+
     UpdateUsernameUseCaseSync SUT;
-    UpdateUsernameHttpEndpointSync mUpdateUsernameHttpEndpointSyncMock;
-    UsersCache mUsersCacheMock;
-    EventBusPoster mEventBusPosterMock;
+    @Mock UpdateUsernameHttpEndpointSync mUpdateUsernameHttpEndpointSyncMock;
+    @Mock UsersCache mUsersCacheMock;
+    @Mock EventBusPoster mEventBusPosterMock;
 
     @Before
     public void setUp() throws Exception {
-        mUpdateUsernameHttpEndpointSyncMock = mock(UpdateUsernameHttpEndpointSync.class);
-        mUsersCacheMock = mock(UsersCache.class);
-        mEventBusPosterMock = mock(com.techyourchance.mockitofundamentals.exercise5.eventbus.EventBusPoster.class);
+
         SUT = new UpdateUsernameUseCaseSync(mUpdateUsernameHttpEndpointSyncMock,mUsersCacheMock,  mEventBusPosterMock);
         success();
     }
